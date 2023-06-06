@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 8
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdb59744f3f34864f9af55e0bb473363, type: 3}
+  m_Name: ingredients
+  m_EditorClassIdentifier: 
+  sheets:
+  - name: ingredients
+    list:
+    - index: 0
+      name: Null
+      englishName: Null
+      installerPosX: -100
+      installerPosY: -100
+      installerPosZ: -100
+    - index: 1
+      name: "\uBC25"
+      englishName: Rice
+      installerPosX: 1
+      installerPosY: 1
+      installerPosZ: 0
+    - index: 2
+      name: "\uAE40\uCE58"
+      englishName: Kimchi
+      installerPosX: 3
+      installerPosY: 1
+      installerPosZ: 0
+    - index: 3
+      name: "\uC0C1\uCD94"
+      englishName: Lettuce
+      installerPosX: 2
+      installerPosY: 1
+      installerPosZ: 0
+    - index: 4
+      name: "\uACE0\uCD94\uCC38\uCE58"
+      englishName: RedTuna
+      installerPosX: 0
+      installerPosY: 0
+      installerPosZ: 0
+    - index: 5
+      name: "\uAC04\uC7A5"
+      englishName: SoiSource
+      installerPosX: 0
+      installerPosY: 0
+      installerPosZ: 0
+    - index: 6
+      name: "\uACC4\uB780"
+      englishName: Egg
+      installerPosX: 0
+      installerPosY: 0
+      installerPosZ: 0
+    - index: 7
+      name: "\uC2A4\uD338"
+      englishName: Spam
+      installerPosX: 0
+      installerPosY: 0
+      installerPosZ: 0
