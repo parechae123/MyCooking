@@ -47,7 +47,10 @@ public class PlayerControl : MonoBehaviour
     #region VR 검지손가락 인풋관리
     public void OnRightTriggerPress(InputAction.CallbackContext ctx)
     {
-
+        if (ctx.started)
+        {
+            
+        }
     }
     public void OnLeftTriggerPress(InputAction.CallbackContext ctx)
     {
