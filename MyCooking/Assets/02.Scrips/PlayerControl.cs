@@ -11,11 +11,38 @@ public class PlayerControl : MonoBehaviour
     public Transform objOnLeftHand;
     public Transform objOnRighttHand;
     public LayerMask OBJLayers;
+    private Queue<Vector3> leftThrowingVector = new Queue<Vector3>();
+    private Queue<Vector3> rightThrowingVector = new Queue<Vector3>();
+    private float[] throwingTimer = new float[2];
     #endregion
     private void Awake()
     {
         leftHandTR = GameObject.Find("LeftHand Controller").GetComponent<Transform>();
         rightHandTR = GameObject.Find("RightHand Controller").GetComponent<Transform>();
+    }
+    private void Update()
+    {
+        throwingTimer[0] += Time.deltaTime;
+        throwingTimer[1] += Time.deltaTime;
+        if (objOnRighttHand != null && throwingTimer[0] >= 0.03f)
+        {
+            rightThrowingVector.Enqueue(rightHandTR.position);
+            if (rightThrowingVector.Count >= 6)
+            {
+                rightThrowingVector.Dequeue();
+            }
+            throwingTimer[0] = 0;
+        }
+        else if (objOnLeftHand != null && throwingTimer[1] >= 0.03f)
+        {
+
+            leftThrowingVector.Enqueue(leftHandTR.position);
+            if (leftThrowingVector.Count >= 6)
+            {
+                leftThrowingVector.Dequeue();
+            }
+            throwingTimer[1] = 0;
+        }
     }
     #region VR °ËÁö¼Õ°¡¶ô ÀÎÇ²°ü¸®
     public void OnRightTriggerPress(InputAction.CallbackContext ctx)
@@ -80,8 +107,8 @@ public class PlayerControl : MonoBehaviour
                 GameObject objTemp = Hit.collider.gameObject;
                 if (handTR == leftHandTR)
                 {
-                    StartCoroutine(FreazerRotations(objTemp,leftHandTR.transform));
-                    
+                    StartCoroutine(FreazerRotations(objTemp, leftHandTR.transform));
+
                 }
                 else if (handTR == rightHandTR)
                 {
@@ -107,11 +134,11 @@ public class PlayerControl : MonoBehaviour
             }
         }
     }
-    IEnumerator FreazerRotations(GameObject target,Transform handDir)
+    IEnumerator FreazerRotations(GameObject target, Transform handDir)
     {
         Vector2 lastHandPosition = new Vector2(handDir.transform.position.x, handDir.transform.position.z);
         float disFromOrigin = 0;
-        while (RightTriggerOn||LeftTriggerOn)
+        while (RightTriggerOn || LeftTriggerOn)
         {
             yield return null;
             disFromOrigin = Vector2.Distance(lastHandPosition, new Vector2(handDir.position.x, handDir.position.z));
@@ -127,6 +154,33 @@ public class PlayerControl : MonoBehaviour
             {
                 targetRB.useGravity = true;
                 targetRB.constraints = RigidbodyConstraints.None;
+                Debug.Log("´øÁü");
+                Vector2 LastThrowingValue = Vector2.zero;
+                Vector3 ThrowForce = Vector3.zero;
+                foreach (var item in leftThrowingVector)
+                {
+                    Debug.Log("´øÁü °¢µµºÐ¼®");
+                    if (item.x > LastThrowingValue.x)
+                    {
+                        ThrowForce += Vector3.right * 20;
+                    }
+                    else
+                    {
+                        ThrowForce -= Vector3.right * 20;
+                    }
+                    if (item.z > LastThrowingValue.y)
+                    {
+                        ThrowForce += Vector3.forward * 20;
+                    }
+                    else
+                    {
+                        ThrowForce -= Vector3.forward * 20;
+                    }
+                    LastThrowingValue = new Vector2(item.x, item.z);
+                }
+                leftThrowingVector.Clear();
+                targetRB.AddForce(ThrowForce * 5);
+
             }
             objOnLeftHand.parent = null;
             objOnLeftHand = null;
@@ -138,6 +192,32 @@ public class PlayerControl : MonoBehaviour
             {
                 targetRB.useGravity = true;
                 targetRB.constraints = RigidbodyConstraints.None;
+                Debug.Log("´øÁü");
+                Vector2 LastThrowingValue = Vector2.zero;
+                Vector3 ThrowForce = Vector3.zero;
+                foreach (var item in rightThrowingVector)
+                {
+                    Debug.Log("´øÁü °¢µµºÐ¼®");
+                    if (item.x > LastThrowingValue.x)
+                    {
+                        ThrowForce += Vector3.right * 20;
+                    }
+                    else
+                    {
+                        ThrowForce -= Vector3.right * 20;
+                    }
+                    if (item.z > LastThrowingValue.y)
+                    {
+                        ThrowForce += Vector3.forward * 20;
+                    }
+                    else
+                    {
+                        ThrowForce -= Vector3.forward * 20;
+                    }
+                    LastThrowingValue = new Vector2(item.x, item.z);
+                }
+                rightThrowingVector.Clear();
+                targetRB.AddForce(ThrowForce * 5);
             }
             objOnRighttHand.parent = null;
             objOnRighttHand = null;
@@ -177,4 +257,5 @@ public class PlayerControl : MonoBehaviour
         }
     }
     #endregion
+
 }
