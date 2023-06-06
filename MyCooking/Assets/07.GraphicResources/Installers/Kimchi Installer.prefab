@@ -222,7 +222,7 @@ GameObject:
   - component: {fileID: 8491773593572078421}
   - component: {fileID: 3481784841897953951}
   m_Layer: 7
-  m_Name: KimchiInstaller
+  m_Name: Kimchi Installer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -237,7 +237,7 @@ Transform:
   m_GameObject: {fileID: 1091978261394954558}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.474, y: 1.1882, z: -0.296}
-  m_LocalScale: {x: 6, y: 6, z: 6}
+  m_LocalScale: {x: 10, y: 10, z: 10}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 5925302992632639397}

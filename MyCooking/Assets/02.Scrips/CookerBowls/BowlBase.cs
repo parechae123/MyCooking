@@ -30,7 +30,7 @@ public class BowlBase : MonoBehaviour
         }
         else
         {
-            if (Physics.Raycast(transform.position, Vector3.down, out hit, 0.3f, whatIsInduction))
+            if (Physics.Raycast(FoodPoint.position, Vector3.down, out hit, 0.3f, whatIsInduction))
             {
                 if (!isOnInduction)
                 {
@@ -51,9 +51,9 @@ public class BowlBase : MonoBehaviour
                     BoxCollider inductionBC = hit.collider.GetComponent<BoxCollider>();
                     transform.parent = hit.collider.transform;
 
-                    transform.rotation = Quaternion.Euler(0, 180, 0);
-                    transform.localScale = new Vector3(0.00323918881f, 0.00558730587f, 0.00558730355f);
-                    transform.position = hit.transform.position;
+                    transform.rotation = Quaternion.Euler(0, -90, 0);
+                    transform.localScale = new Vector3(1.288439f, 67.06584f, 1.288439f);
+                    transform.localPosition = new Vector3(-0.867f, 8.3f, 0f);
                 }
             }
 

@@ -14,6 +14,7 @@ public class PlayerControl : MonoBehaviour
     private Queue<Vector3> leftThrowingVector = new Queue<Vector3>();
     private Queue<Vector3> rightThrowingVector = new Queue<Vector3>();
     private float[] throwingTimer = new float[2];
+    public Transform plr;
     #endregion
     private void Awake()
     {
@@ -43,6 +44,12 @@ public class PlayerControl : MonoBehaviour
             }
             throwingTimer[1] = 0;
         }
+    }
+    public void OnQuestJoy(InputAction.CallbackContext ctx)
+    {
+        Vector2 dir = ctx.ReadValue<Vector2>();
+        Vector3 tempVec = Camera.main.transform.TransformDirection(dir.x,0,dir.y);
+        plr.transform.position += new Vector3(tempVec.x/20,0,tempVec.z/20);
     }
     #region VR 검지손가락 인풋관리
     public void OnRightTriggerPress(InputAction.CallbackContext ctx)
