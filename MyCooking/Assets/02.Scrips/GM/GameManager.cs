@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     private static GameManager gm;
     public static GameManager GMinstatnce() {  return gm;  }
     public foodList.Param SelectedFood;
+    public Queue<foodList.Param> customerSelectedFood = new Queue<foodList.Param>();
     public foodList foodTable;
     public ingredientList IGList;
     public bool isGuideLineEnabled;
@@ -19,6 +20,7 @@ public class GameManager : MonoBehaviour
     public Image timerUI;
     public bool isCookDone = false;
     public Slider CookStar;
+    public Queue<Customer> CustomerPool = new Queue<Customer>();
     private void Awake()
     {
         SelectedFood = null;
@@ -34,11 +36,11 @@ public class GameManager : MonoBehaviour
     }
     public void GetIngredientPosition(int foodIndex)//선택한 요리의 재료 포지션값을 받음
     {
-        StartCoroutine(CookTimer(10));
         if (IngredPosition.Count ==0)
         {
             ingredientIsOut.Clear();
             SelectedFood = foodTable.sheets[0].list[foodIndex];
+            Debug.Log(SelectedFood.foodName);
             IngredPosition.Enqueue(new Vector3(IGList.sheets[0].list[SelectedFood.ingredientIndex1].installerPosX, IGList.sheets[0].list[SelectedFood.ingredientIndex1].installerPosY, IGList.sheets[0].list[SelectedFood.ingredientIndex1].installerPosZ));
             ingredientIsOut.Add(false);
             if (SelectedFood.ingredientIndex2 !=0)
@@ -52,6 +54,24 @@ public class GameManager : MonoBehaviour
                 }
             }
             IngredientPositionDequeue();
+        }
+    }
+    public void GetOrder(int foodIndex)//주문한 요리의 리스트를 순서대로 작성
+    {
+        customerSelectedFood.Enqueue(foodTable.sheets[0].list[foodIndex]);
+        Debug.Log("입력");
+        if (IngredPosition.Count == 0 && customerSelectedFood.Count > 0)
+        {
+            Debug.Log("요리리스트받기");
+            GetIngredientPosition(customerSelectedFood.Dequeue().foodIndex);
+        }
+    }
+    public void NextOrder() //다음요리,완료시 호출
+    {
+        if (IngredPosition.Count == 0 && customerSelectedFood.Count > 0)
+        {
+            Debug.Log("요리리스트받기");
+            GetIngredientPosition(customerSelectedFood.Dequeue().foodIndex);
         }
     }
     public void IngredientPositionDequeue()
@@ -111,34 +131,6 @@ public class GameManager : MonoBehaviour
             }
             IngredientPositionDequeue();
         }
-    }
-    IEnumerator CookTimer(float GoalTime)
-    {
-        //음식별 시간 넣어줘야함 GoalTime은 음식별 목표시간
-        timerUI.color = Color.green;
-        float timerNum = 1;
-        isCookDone = false;
-        for (int i = 0; i < 2; i++)
-        {
-            while (timerNum >= 0)
-            {
-                if (isCookDone)
-                {
-                    Debug.Log("음식스톱");
-                    GetCookStars(timerNum);
-                    yield break;
-                }
-                yield return null;
-                timerNum -= Time.deltaTime / GoalTime  /*/GoalTime*/;
-                timerUI.fillAmount = timerNum;
-                //목표가 10초일시 10까지는 초록 10~20초까지는 회색 20~30초까지 빨간색
-            }
-            timerNum = 1;
-            timerUI.color = Color.yellow;
-        }
-        timerUI.fillAmount = 1;
-        timerUI.color = Color.red;
-        GetCookStars(timerNum);
     }
     public void GetCookStars(float timerTime)
     {
