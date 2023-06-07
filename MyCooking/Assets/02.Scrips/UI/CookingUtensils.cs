@@ -5,10 +5,11 @@ using UnityEngine;
 public class CookingUtensils : MonoBehaviour
 {
     public int layerMask;
-    public List<Transform> cook = new List<Transform>();
+    public List<string> cook = new List<string>();
     public FryFan fryfan;
     public int hitnum = 0;
-    public int childCount;
+    private GameObject cookingCompletion;
+    private int num = 0;
     // Start is called before the first frame update
     void Start()        //음식 터치했을 때 음식이 완성되게 하기 및 해당 도구가 거치대에 걸어지게 하기
     {
@@ -20,47 +21,53 @@ public class CookingUtensils : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.DrawRay(transform.position, transform.forward * 0.7f, Color.red);
-        RaycastHit hitInfo;
-        if (Physics.Raycast(transform.position, transform.forward, out hitInfo, 0.7f, layerMask))
-        {
-            childCount = hitInfo.collider.transform.hierarchyCount - 1; //오브젝트에 든 자식의 갯수
-            for (int i = 0; i < childCount; i++)
-            {
-                Debug.Log("반복문 반응" + hitInfo.collider.name);
-                if (hitInfo.collider.transform.GetChild(i).gameObject.layer == 6)       //hitInfo.collider.transform.GetChild(i).gameObject.layer 이건 10진법이고 layerMask 이건 2진법
-                {
-                    cook.Add(hitInfo.collider.transform.GetChild(i));           //자식오브젝트를 리스트에 넣음
-                    Debug.Log("자식 오브젝트 접근 반응");
-                    hitInfo.collider.transform.GetChild(i).gameObject.SetActive(false);
-                }
-            }
 
-            /*for (int i = 0; i < cook.Count - 1; i++)
+        Debug.DrawRay(transform.position, transform.forward * 0.7f, Color.red);
+        if (Physics.Raycast(transform.position, transform.forward, 0.7f, layerMask))
+        {
+            RaycastHit hitInfo;
+            if (Physics.Raycast(transform.position, transform.forward, out hitInfo, 0.7f, layerMask) && hitInfo.collider.name == "FryPan")
             {
-                if (list[i].name == 자식 오브젝트 이름 && list[i].name == 자식 오브젝트 이름)
+                Debug.Log("if 반응" + hitInfo.collider.transform.childCount);
+                for (int i = 0; i < hitInfo.collider.transform.childCount; i++)
+                {
+                    if (hitInfo.collider.transform.GetChild(i).gameObject.layer == 6)       //hitInfo.collider.transform.GetChild(i).gameObject.layer 이건 10진법이고 layerMask 이건 2진법
                     {
-                        해당 위치에 에셋에서 오브젝트를 찾아 Instantiate 하기
+                        cook.Add(hitInfo.collider.transform.GetChild(i).name);           //자식오브젝트를 리스트에 넣음
+                        Debug.Log("자식 오브젝트 접근 반응");
+                        Destroy(hitInfo.collider.transform.GetChild(i).gameObject);
                     }
-                if (list[i].name == 자식 오브젝트 이름 && list[i].name == 자식 오브젝트 이름)
-                    {
-                        해당 위치에 에셋에서 오브젝트를 찾아 Instantiate 하기
-                    }
-                if (list[i].name == 자식 오브젝트 이름 && list[i].name == 자식 오브젝트 이름)
-                    {
-                        해당 위치에 에셋에서 오브젝트를 찾아 Instantiate 하기
-                    }
-                if (list[i].name == 자식 오브젝트 이름 && list[i].name == 자식 오브젝트 이름)
-                    {
-                        해당 위치에 에셋에서 오브젝트를 찾아 Instantiate 하기
-                    }
-                if (list[i].name == 자식 오브젝트 이름 && list[i].name == 자식 오브젝트 이름)
-                    {
-                        해당 위치에 에셋에서 오브젝트를 찾아 Instantiate 하기
-                    }
-            {*/
+                }
+                Debug.Log("리스트 크기: "+ cook.Count);
+                if (cook.Contains("Kimchi") && cook.Contains("Rice"))               //김치볶음밥 생성
+                {
+                    num++;
+                    cookingCompletion = Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/KimchiFriedRice"));
+                    cookingCompletion.transform.position = hitInfo.transform.position;
+                    cook.Clear();
+                    Debug.Log("if문 반복" + num);
+                }
+                /*if (cook.Contains("Kimchi") && cook.Contains("Rice"))
+                {
+                    num++;
+                    cookingCompletion = Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/KimchiFriedRice"));
+                    cookingCompletion.transform.position = hitInfo.transform.position;
+                    cook.Clear();
+                    Debug.Log("if문 반복" + num);
+                }
+                if (cook.Contains("Kimchi") && cook.Contains("Rice"))
+                {
+                    num++;
+                    cookingCompletion = Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/KimchiFriedRice"));
+                    cookingCompletion.transform.position = hitInfo.transform.position;
+                    cook.Clear();
+                    Debug.Log("if문 반복" + num);
+                }*/
+
+            }
 
         }
     }
 }
+
 
