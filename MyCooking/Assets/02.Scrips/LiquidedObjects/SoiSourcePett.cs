@@ -8,6 +8,7 @@ public class SoiSourcePett : MonoBehaviour
     public Transform Liquid;
     private LiquidScaling LiquidSize;
     public LayerMask interactiveLayers;
+    public Transform sourcePosition;
 
     // Update is called once per frame
     void Update()
@@ -25,7 +26,7 @@ public class SoiSourcePett : MonoBehaviour
             else
             {
                 Liquid.gameObject.SetActive(true);
-                Liquid.position = new Vector3(GetComponent<CapsuleCollider>().bounds.extents.x*-1, GetComponent<CapsuleCollider>().bounds.extents.y-0.2f, 0)+transform.position;
+                Liquid.position = sourcePosition.position;
 
             }
             if (Physics.Raycast(Liquid.position, -Liquid.up, out hit, 10,interactiveLayers))

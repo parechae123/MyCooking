@@ -30,37 +30,47 @@ public class BowlBase : MonoBehaviour
         }
         else
         {
-            if (Physics.Raycast(FoodPoint.position, Vector3.down, out hit, 0.3f, whatIsInduction))
+            if (Physics.Raycast(transform.position, Vector3.down, out hit, 0.3f, whatIsInduction))
             {
-                if (!isOnInduction)
+                if (!isOnInduction&& hit.collider.gameObject.name != "FryPan"&&hit.collider.gameObject.layer == 8)
                 {
-                    isOnInduction = true;
+                    Debug.Log("1");
                     if (transform.parent.name.Contains("Controller"))
                     {
+                        Debug.Log("2");
                         if (PC.objOnRighttHand == transform)
                         {
+                            Debug.Log("3");
                             PC.objOnRighttHand = null;
                             this.transform.parent = null;
                         }
                         else if (PC.objOnLeftHand == transform)
                         {
+                            Debug.Log("4");
                             PC.objOnRighttHand = null;
                             this.transform.parent = null;
                         }
                     }
+                    Debug.Log("5");
                     BoxCollider inductionBC = hit.collider.GetComponent<BoxCollider>();
                     transform.parent = hit.collider.transform;
 
                     transform.rotation = Quaternion.Euler(0, -90, 0);
-                    transform.localScale = new Vector3(1.288439f, 67.06584f, 1.288439f);
-                    transform.localPosition = new Vector3(-0.867f, 8.3f, 0f);
+                    transform.localScale = new Vector3(1.28844f, 67.06584f, 1.28844f);
+                    transform.localPosition = new Vector3(-0.799000025f, 5f, 0);
+                    Debug.Log("6");
+                    isOnInduction = true;
                 }
             }
 
         }
         if (Physics.SphereCast(FoodPoint.position, 0.05f, FoodPoint.up, out hit, 0.3f, whatIsInduction))
         {
-            BowlProperty();
+            if (hit.collider.gameObject.name != "FryPan"&&hit.collider.gameObject.layer != 8)
+            {
+                Debug.Log("음식 인식");
+                BowlProperty();
+            }
         }
 
     }
