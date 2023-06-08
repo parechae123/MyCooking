@@ -16,35 +16,35 @@ MonoBehaviour:
   - name: food
     list:
     - foodIndex: 0
-      foodName: "\uAE40\uCE58\uBCF6\uC74C\uBC25"
+      foodName: fried_rice
       ingredientTextInfo: "\uAE40\uCE58/\uBC25"
       ingredientIndex1: 2
       ingredientIndex2: 1
       ingredientIndex3: 0
       CookBowl: Frypan
     - foodIndex: 1
-      foodName: "\uACE0\uCD94\uCC38\uCE58\uBE44\uBE54\uBC25"
+      foodName: RedPepperTunaBibimbap
       ingredientTextInfo: "\uACE0\uCD94\uCC38\uCE58/\uC0C1\uCD94/\uBC25"
       ingredientIndex1: 4
       ingredientIndex2: 3
       ingredientIndex3: 1
       CookBowl: Bowl
     - foodIndex: 2
-      foodName: "\uAC04\uC7A5\uACC4\uB780\uBC25"
+      foodName: SoySauceEggRice
       ingredientTextInfo: "\uAC04\uC7A5/\uACC4\uB780/\uBC25"
       ingredientIndex1: 5
       ingredientIndex2: 6
       ingredientIndex3: 1
       CookBowl: Frypan
     - foodIndex: 3
-      foodName: "\uC2A4\uD338\uAD6C\uC774"
+      foodName: girlledSpam
       ingredientTextInfo: "\uC2A4\uD338"
-      ingredientIndex1: 9
+      ingredientIndex1: 7
       ingredientIndex2: 0
       ingredientIndex3: 0
       CookBowl: Frypan
     - foodIndex: 4
-      foodName: "\uACC4\uB780\uD6C4\uB77C\uC774"
+      foodName: eggFry
       ingredientTextInfo: "\uACC4\uB780"
       ingredientIndex1: 6
       ingredientIndex2: 0
