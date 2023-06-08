@@ -15,7 +15,19 @@ public class PlayerControl : MonoBehaviour
     private Queue<Vector3> rightThrowingVector = new Queue<Vector3>();
     private float[] throwingTimer = new float[2];
     public Transform plr;
+    //준희
+    public int layerMask;
+    public List<string> cook = new List<string>();
+    public int hitnum = 0;
+    private GameObject cookingCompletion;
+    public Transform foodPoint;
+    public Transform fryFan1;
+    public GameObject spoon;
     #endregion
+    private void Start()
+    {
+        layerMask = 1 << LayerMask.NameToLayer("Objects");
+    }
     private void Awake()
     {
         leftHandTR = GameObject.Find("LeftHand Controller").GetComponent<Transform>();
@@ -48,20 +60,120 @@ public class PlayerControl : MonoBehaviour
     public void OnQuestJoy(InputAction.CallbackContext ctx)
     {
         Vector2 dir = ctx.ReadValue<Vector2>();
-        Vector3 tempVec = Camera.main.transform.TransformDirection(dir.x,0,dir.y);
-        plr.transform.position += new Vector3(tempVec.x/20,0,tempVec.z/20);
+        Vector3 tempVec = Camera.main.transform.TransformDirection(dir.x, 0, dir.y);
+        plr.transform.position += new Vector3(tempVec.x / 20, 0, tempVec.z / 20);
     }
     #region VR 검지손가락 인풋관리
     public void OnRightTriggerPress(InputAction.CallbackContext ctx)
     {
         if (ctx.started)
         {
-            
+            if (spoon.transform.parent == rightHandTR)
+            {
+                if (Physics.Raycast(rightHandTR.transform.position, rightHandTR.transform.forward, 0.7f, layerMask))
+                {
+                    RaycastHit hitInfo;
+                    if (Physics.Raycast(rightHandTR.transform.position, rightHandTR.transform.forward, out hitInfo, 0.7f, layerMask) && hitInfo.collider.name == "FryPan")
+                    {
+                        for (int i = 0; i < hitInfo.collider.transform.childCount; i++)
+                        {
+                            if (hitInfo.collider.transform.GetChild(i).gameObject.layer == 6)       //hitInfo.collider.transform.GetChild(i).gameObject.layer 이건 10진법이고 layerMask 이건 2진법
+                            {
+                                cook.Add(hitInfo.collider.transform.GetChild(i).name);           //자식오브젝트를 리스트에 넣음
+                                Destroy(hitInfo.collider.transform.GetChild(i).gameObject);
+                            }
+                        }                                                                   //여기 이름은 나중에 대체할 수도 있음
+                        if (cook.Contains("Kimchi") && cook.Contains("Rice"))               //김치볶음밥 생성
+                        {
+                            cookingCompletion = Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/KimchiFriedRice"));
+                            cookingCompletion.transform.position = foodPoint.transform.localPosition;
+                            cook.Clear();
+                        }
+                        if (cook.Contains("Scrambledeggs") && cook.Contains("Rice"))               //간장계란비빔밥
+                        {
+                            cookingCompletion = Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/SoySauceAndEggBibimbap"));
+                            cookingCompletion.transform.position = foodPoint.transform.localPosition;
+                            cook.Clear();
+                        }
+                        if (cook.Contains("Friedegg"))                                      //스크럼블에그
+                        {
+                            cookingCompletion = Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/Scrambledeggs"));
+                            cookingCompletion.gameObject.transform.position = foodPoint.localPosition;
+                            cookingCompletion.gameObject.transform.parent = fryFan1;
+                            cook.Clear();
+                        }
+                        if (cook.Contains("Spam"))                                      //스팸
+                        {
+                            cookingCompletion = Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/PieceOfSpam"));
+                            cookingCompletion.transform.position = foodPoint.transform.localPosition;
+                            cook.Clear();
+                        }
+                        if (cook.Contains("RedPepperTuna") && cook.Contains("Rice"))      //고추참치비빔밥
+                        {
+                            cookingCompletion = Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/RedPepperTunaBibimbap"));
+                            cookingCompletion.transform.position = foodPoint.transform.localPosition;
+                            cook.Clear();
+                        }
+                    }
+                }
+            }
         }
     }
     public void OnLeftTriggerPress(InputAction.CallbackContext ctx)
     {
+        if (ctx.started)
+        {
+            if (spoon.transform.parent == leftHandTR)
+            {
+                if (Physics.Raycast(leftHandTR.transform.position, leftHandTR.transform.forward, 0.7f, layerMask))
+                {
+                    RaycastHit hitInfo;
+                    if (Physics.Raycast(leftHandTR.transform.position, leftHandTR.transform.forward, out hitInfo, 0.7f, layerMask) && hitInfo.collider.name == "FryPan")
+                    {
+                        for (int i = 0; i < hitInfo.collider.transform.childCount; i++)
+                        {
+                            if (hitInfo.collider.transform.GetChild(i).gameObject.layer == 6)       //hitInfo.collider.transform.GetChild(i).gameObject.layer 이건 10진법이고 layerMask 이건 2진법
+                            {
+                                cook.Add(hitInfo.collider.transform.GetChild(i).name);           //자식오브젝트를 리스트에 넣음
+                                Destroy(hitInfo.collider.transform.GetChild(i).gameObject);
+                            }
+                        }                                                                   //여기 이름은 나중에 대체할 수도 있음
+                        if (cook.Contains("Kimchi") && cook.Contains("Rice"))               //김치볶음밥 생성
+                        {
+                            cookingCompletion = Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/KimchiFriedRice"));
+                            cookingCompletion.transform.position = foodPoint.transform.localPosition;
+                            cook.Clear();
+                        }
+                        if (cook.Contains("Scrambledeggs") && cook.Contains("Rice"))               //간장계란비빔밥
+                        {
+                            cookingCompletion = Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/SoySauceAndEggBibimbap"));
+                            cookingCompletion.transform.position = foodPoint.transform.localPosition;
+                            cook.Clear();
+                        }
+                        if (cook.Contains("Friedegg"))                                      //스크럼블에그
+                        {
+                            cookingCompletion = Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/Scrambledeggs"));
+                            cookingCompletion.gameObject.transform.position = foodPoint.localPosition;
+                            fryFan1.gameObject.transform.parent = cookingCompletion.transform;
+                            cook.Clear();
+                        }
+                        if (cook.Contains("Spam"))                                      //스팸
+                        {
+                            cookingCompletion = Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/PieceOfSpam"));
+                            cookingCompletion.transform.position = foodPoint.transform.localPosition;
+                            cook.Clear();
+                        }
+                        if (cook.Contains("RedPepperTuna") && cook.Contains("Rice"))      //고추참치비빔밥
+                        {
+                            cookingCompletion = Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/RedPepperTunaBibimbap"));
+                            cookingCompletion.transform.position = foodPoint.transform.localPosition;
+                            cook.Clear();
+                        }
+                    }
 
+                }
+            }
+        }
     }
     private void SenseObjects(Transform handTR)
     {

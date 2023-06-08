@@ -3613,6 +3613,16 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 909825638746974292, guid: 9eb96aec03c3fea45983a831f99e0f82,
         type: 3}
+      propertyPath: fryFan1
+      value: 
+      objectReference: {fileID: 1877952402976148728}
+    - target: {fileID: 909825638746974292, guid: 9eb96aec03c3fea45983a831f99e0f82,
+        type: 3}
+      propertyPath: foodPoint
+      value: 
+      objectReference: {fileID: 1591983494}
+    - target: {fileID: 909825638746974292, guid: 9eb96aec03c3fea45983a831f99e0f82,
+        type: 3}
       propertyPath: cook.Array.size
       value: 0
       objectReference: {fileID: 0}
@@ -3676,7 +3686,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spoon
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 909825638746974292, guid: 9eb96aec03c3fea45983a831f99e0f82, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 9eb96aec03c3fea45983a831f99e0f82, type: 3}
 --- !u!1 &1196627048
 GameObject:
@@ -4317,10 +4328,10 @@ RectTransform:
   m_Father: {fileID: 860987317}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 90, y: -90}
-  m_SizeDelta: {x: 180, y: 180}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1352098500
 MonoBehaviour:
@@ -4588,6 +4599,21 @@ PrefabInstance:
       objectReference: {fileID: 1305765292}
     - target: {fileID: 2221031293632130759, guid: 728faafd0b1d22140a31d1dd696cae0c,
         type: 3}
+      propertyPath: spoon
+      value: 
+      objectReference: {fileID: 1388087298}
+    - target: {fileID: 2221031293632130759, guid: 728faafd0b1d22140a31d1dd696cae0c,
+        type: 3}
+      propertyPath: fryFan1
+      value: 
+      objectReference: {fileID: 1877952402976148728}
+    - target: {fileID: 2221031293632130759, guid: 728faafd0b1d22140a31d1dd696cae0c,
+        type: 3}
+      propertyPath: foodPoint
+      value: 
+      objectReference: {fileID: 1591983494}
+    - target: {fileID: 2221031293632130759, guid: 728faafd0b1d22140a31d1dd696cae0c,
+        type: 3}
       propertyPath: OBJLayers.m_Bits
       value: 1728
       objectReference: {fileID: 0}
@@ -4665,6 +4691,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf6283ed8eb51b847aecb8aca160f083, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1388087298 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 909825638746974298, guid: 9eb96aec03c3fea45983a831f99e0f82,
+    type: 3}
+  m_PrefabInstance: {fileID: 1173108132}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1393548792
 GameObject:
   m_ObjectHideFlags: 0
