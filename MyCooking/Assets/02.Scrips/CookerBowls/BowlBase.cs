@@ -66,7 +66,7 @@ public class BowlBase : MonoBehaviour
         }
         if (Physics.SphereCast(FoodPoint.position, 0.05f, FoodPoint.up, out hit, 0.3f, whatIsInduction))
         {
-            if (hit.collider.gameObject.name != "FryPan"&&hit.collider.gameObject.layer != 8)
+            if (hit.collider.gameObject.name != "FryPan"&&hit.collider.gameObject.layer != 8 && !hit.collider.name.Contains("Spoon"))
             {
                 Debug.Log("음식 인식");
                 BowlProperty();

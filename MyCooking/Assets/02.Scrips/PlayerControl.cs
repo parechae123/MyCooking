@@ -86,32 +86,33 @@ public class PlayerControl : MonoBehaviour
                         if (cook.Contains("Kimchi") && cook.Contains("Rice"))               //±èÄ¡ººÀ½¹ä »ý¼º
                         {
                             cookingCompletion = Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/KimchiFriedRice"));
-                            cookingCompletion.transform.position = foodPoint.transform.localPosition;
+                            cookingCompletion.transform.position = foodPoint.transform.position;
                             cook.Clear();
                         }
                         if (cook.Contains("Scrambledeggs") && cook.Contains("Rice"))               //°£Àå°è¶õºñºö¹ä
                         {
                             cookingCompletion = Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/SoySauceAndEggBibimbap"));
-                            cookingCompletion.transform.position = foodPoint.transform.localPosition;
+                            cookingCompletion.transform.position = foodPoint.transform.position;
                             cook.Clear();
                         }
                         if (cook.Contains("Friedegg"))                                      //½ºÅ©·³ºí¿¡±×
                         {
+                            Debug.Log("°è¶õÈÄ¶óÀÌ");
                             cookingCompletion = Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/Scrambledeggs"));
-                            cookingCompletion.gameObject.transform.position = foodPoint.localPosition;
+                            cookingCompletion.gameObject.transform.position = foodPoint.position;
                             cookingCompletion.gameObject.transform.parent = fryFan1;
                             cook.Clear();
                         }
                         if (cook.Contains("Spam"))                                      //½ºÆÔ
                         {
                             cookingCompletion = Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/PieceOfSpam"));
-                            cookingCompletion.transform.position = foodPoint.transform.localPosition;
+                            cookingCompletion.transform.position = foodPoint.transform.position;
                             cook.Clear();
                         }
                         if (cook.Contains("RedPepperTuna") && cook.Contains("Rice"))      //°íÃßÂüÄ¡ºñºö¹ä
                         {
                             cookingCompletion = Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/RedPepperTunaBibimbap"));
-                            cookingCompletion.transform.position = foodPoint.transform.localPosition;
+                            cookingCompletion.transform.position = foodPoint.transform.position;
                             cook.Clear();
                         }
                     }
@@ -141,32 +142,32 @@ public class PlayerControl : MonoBehaviour
                         if (cook.Contains("Kimchi") && cook.Contains("Rice"))               //±èÄ¡ººÀ½¹ä »ý¼º
                         {
                             cookingCompletion = Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/KimchiFriedRice"));
-                            cookingCompletion.transform.position = foodPoint.transform.localPosition;
+                            cookingCompletion.transform.position = foodPoint.transform.position;
                             cook.Clear();
                         }
                         if (cook.Contains("Scrambledeggs") && cook.Contains("Rice"))               //°£Àå°è¶õºñºö¹ä
                         {
                             cookingCompletion = Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/SoySauceAndEggBibimbap"));
-                            cookingCompletion.transform.position = foodPoint.transform.localPosition;
+                            cookingCompletion.transform.position = foodPoint.transform.position;
                             cook.Clear();
                         }
                         if (cook.Contains("Friedegg"))                                      //½ºÅ©·³ºí¿¡±×
                         {
                             cookingCompletion = Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/Scrambledeggs"));
-                            cookingCompletion.gameObject.transform.position = foodPoint.localPosition;
+                            cookingCompletion.gameObject.transform.position = foodPoint.position;
                             fryFan1.gameObject.transform.parent = cookingCompletion.transform;
                             cook.Clear();
                         }
                         if (cook.Contains("Spam"))                                      //½ºÆÔ
                         {
                             cookingCompletion = Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/PieceOfSpam"));
-                            cookingCompletion.transform.position = foodPoint.transform.localPosition;
+                            cookingCompletion.transform.position = foodPoint.transform.position;
                             cook.Clear();
                         }
                         if (cook.Contains("RedPepperTuna") && cook.Contains("Rice"))      //°íÃßÂüÄ¡ºñºö¹ä
                         {
                             cookingCompletion = Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/RedPepperTunaBibimbap"));
-                            cookingCompletion.transform.position = foodPoint.transform.localPosition;
+                            cookingCompletion.transform.position = foodPoint.transform.position;
                             cook.Clear();
                         }
                     }
