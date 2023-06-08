@@ -7,6 +7,14 @@ public class CustomerManager : MonoBehaviour
     public List<Customer> customers = new List<Customer>();
     public float respawnTime = 10;
     public float timer = 0;
+    public bool isAllSetting = false;
+    private void OnValidate()
+    {
+        for (int i = 0; i<5; i++)
+        {
+            transform.GetChild(i).position = new Vector3(0, 1.2f, 6-(i*0.6f));
+        }
+    }
     private void Start()
     {
         for (int i = 0; i <= 4; i++)
@@ -18,6 +26,7 @@ public class CustomerManager : MonoBehaviour
         {
             item.customerQueueText.text = (1+customers.IndexOf(item)).ToString();
         }
+        StartCoroutine(OnStartSonom());
     }
     public void ChangeCustomerQueue()
     {
@@ -29,7 +38,7 @@ public class CustomerManager : MonoBehaviour
     public void Update()
     {
         timer += Time.deltaTime;
-        if(timer> respawnTime)
+        if(timer> respawnTime&&isAllSetting)
         {
             if (GameManager.GMinstatnce().CustomerPool.Count>0)
             {
@@ -39,5 +48,19 @@ public class CustomerManager : MonoBehaviour
             }
             timer = 0;
         }
+    }
+    IEnumerator OnStartSonom()
+    {
+        isAllSetting = false;
+        for (int i = 0; i < 5; i++)
+        {
+            GameManager.GMinstatnce().CustomerPool.Enqueue(customers[i]);
+        }
+        for (int i = 0; i<5;i++)
+        {
+            GameManager.GMinstatnce().CustomerPool.Dequeue().gameObject.SetActive(true);
+            yield return new WaitForSeconds(respawnTime);
+        }
+        isAllSetting = true;
     }
 }

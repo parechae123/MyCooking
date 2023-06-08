@@ -14,10 +14,12 @@ public class Customer : MonoBehaviour
     public TextMeshProUGUI customerQueueText;
     public LayerMask cookedFoodLayer;
     public CustomerManager CM;
+    public Image menuImage;
     public void OnEnable()
     {
         customerText.gameObject.SetActive(false);
         randomValue = Random.Range(0, 5);
+        menuImage.sprite = Resources.Load<Sprite>("FoodSprites/" + randomValue.ToString());
         orderIsDone = false;
         GameManager.GMinstatnce().GetOrder(randomValue);
         CM.ChangeCustomerQueue();
@@ -40,7 +42,7 @@ public class Customer : MonoBehaviour
             RaycastHit hit;
             if (Physics.BoxCast(transform.position, Vector3.one * 0.4f, transform.forward, out hit, Quaternion.identity, 1, cookedFoodLayer))
             {
-                if (hit.collider.name == GameManager.GMinstatnce().SelectedFood.foodName)
+                if (hit.collider.name.Contains(GameManager.GMinstatnce().SelectedFood.foodName))
                 {
                     Debug.Log("이름같음");
                     orderIsDone = true;

@@ -41,6 +41,7 @@ public class FryFan : BowlBase
                 if (hit.collider.transform.Find("Bowl"))
                 {
                     hit.collider.transform.Find("Bowl").gameObject.SetActive(false);
+                    //계란후라이 예외처리 필요
                 }
             }
         }
