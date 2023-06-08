@@ -9,7 +9,7 @@ public class CookingUtensils : MonoBehaviour
     public FryFan fryfan;
     public int hitnum = 0;
     private GameObject cookingCompletion;
-    private int num = 0;
+    public Transform foodPoint;
     // Start is called before the first frame update
     void Start()        //음식 터치했을 때 음식이 완성되게 하기 및 해당 도구가 거치대에 걸어지게 하기
     {
@@ -37,32 +37,32 @@ public class CookingUtensils : MonoBehaviour
                         Debug.Log("자식 오브젝트 접근 반응");
                         Destroy(hitInfo.collider.transform.GetChild(i).gameObject);
                     }
-                }
+                }                                                                   //여기 이름은 나중에 대체할 수도 있음
                 Debug.Log("리스트 크기: "+ cook.Count);
                 if (cook.Contains("Kimchi") && cook.Contains("Rice"))               //김치볶음밥 생성
                 {
-                    num++;
                     cookingCompletion = Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/KimchiFriedRice"));
                     cookingCompletion.transform.position = hitInfo.transform.position;
                     cook.Clear();
-                    Debug.Log("if문 반복" + num);
                 }
-                /*if (cook.Contains("Kimchi") && cook.Contains("Rice"))
+                if (cook.Contains("Scrambledeggs") && cook.Contains("Rice"))               //간장계란비빔밥
                 {
-                    num++;
-                    cookingCompletion = Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/KimchiFriedRice"));
+                    cookingCompletion = Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/SoySauceAndEggBibimbap"));
                     cookingCompletion.transform.position = hitInfo.transform.position;
                     cook.Clear();
-                    Debug.Log("if문 반복" + num);
                 }
-                if (cook.Contains("Kimchi") && cook.Contains("Rice"))
+                if (cook.Contains("Friedegg"))                                      //스크럼블에그
                 {
-                    num++;
-                    cookingCompletion = Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/KimchiFriedRice"));
+                    cookingCompletion = Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/Scrambledeggs"));
+                    cookingCompletion.transform.parent = foodPoint;
+                    cook.Clear();
+                }
+                if (cook.Contains("Spam"))                                      //스팸
+                {
+                    cookingCompletion = Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/PieceOfSpam"));
                     cookingCompletion.transform.position = hitInfo.transform.position;
                     cook.Clear();
-                    Debug.Log("if문 반복" + num);
-                }*/
+                }
 
             }
 
