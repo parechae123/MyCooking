@@ -8,16 +8,9 @@ public class CustomerManager : MonoBehaviour
     public float respawnTime = 10;
     public float timer = 0;
     public bool isAllSetting = false;
-    private void OnValidate()
-    {
-        for (int i = 0; i<5; i++)
-        {
-            transform.GetChild(i).position = new Vector3(0, 1.2f, 6-(i*0.6f));
-        }
-    }
     private void Start()
     {
-        for (int i = 0; i <= 4; i++)
+        for (int i = 0; i <= 2; i++)
         {
             customers.Add(transform.GetChild(i).GetComponent<Customer>());
             customers[i].CM = this;
@@ -52,11 +45,11 @@ public class CustomerManager : MonoBehaviour
     IEnumerator OnStartSonom()
     {
         isAllSetting = false;
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 3; i++)
         {
             GameManager.GMinstatnce().CustomerPool.Enqueue(customers[i]);
         }
-        for (int i = 0; i<5;i++)
+        for (int i = 0; i<3;i++)
         {
             GameManager.GMinstatnce().CustomerPool.Dequeue().gameObject.SetActive(true);
             yield return new WaitForSeconds(respawnTime);

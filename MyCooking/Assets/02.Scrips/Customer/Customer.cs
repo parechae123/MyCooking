@@ -18,7 +18,7 @@ public class Customer : MonoBehaviour
     public void OnEnable()
     {
         customerText.gameObject.SetActive(false);
-        randomValue = Random.Range(0, 5);
+        randomValue = Random.Range(0, 4);
         menuImage.sprite = Resources.Load<Sprite>("FoodSprites/" + randomValue.ToString());
         orderIsDone = false;
         GameManager.GMinstatnce().GetOrder(randomValue);

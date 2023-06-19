@@ -37,16 +37,9 @@ MonoBehaviour:
       ingredientIndex3: 1
       CookBowl: Frypan
     - foodIndex: 3
-      foodName: PieceOfSpamss
+      foodName: PieceOfSpam
       ingredientTextInfo: "\uC2A4\uD338"
       ingredientIndex1: 7
-      ingredientIndex2: 0
-      ingredientIndex3: 0
-      CookBowl: Frypan
-    - foodIndex: 4
-      foodName: Egg
-      ingredientTextInfo: "\uACC4\uB780"
-      ingredientIndex1: 6
       ingredientIndex2: 0
       ingredientIndex3: 0
       CookBowl: Frypan
