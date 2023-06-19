@@ -35,6 +35,14 @@ public class FryFan : BowlBase
         hit.collider.transform.localPosition = FoodPoint.localPosition;
         if (hit.collider.transform.Find("Bowl"))
         {
+            if (hit.collider.transform.Find("Egg"))
+            {
+                hit.collider.transform.Find("Egg").gameObject.SetActive(true);
+            }
+            if (hit.collider.transform.Find("Spam"))
+            {
+                hit.collider.transform.Find("Spam").gameObject.SetActive(true);
+            }
             hit.collider.transform.Find("Bowl").gameObject.SetActive(false);
             //계란후라이 예외처리 필요
         }

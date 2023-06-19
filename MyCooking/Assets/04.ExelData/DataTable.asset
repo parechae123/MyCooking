@@ -16,7 +16,7 @@ MonoBehaviour:
   - name: food
     list:
     - foodIndex: 0
-      foodName: fried_rice
+      foodName: KimchiFriedRice
       ingredientTextInfo: "\uAE40\uCE58/\uBC25"
       ingredientIndex1: 2
       ingredientIndex2: 1
@@ -30,21 +30,21 @@ MonoBehaviour:
       ingredientIndex3: 1
       CookBowl: Bowl
     - foodIndex: 2
-      foodName: SoySauceEggRice
+      foodName: SoySauceAndEggBibimbap
       ingredientTextInfo: "\uAC04\uC7A5/\uACC4\uB780/\uBC25"
       ingredientIndex1: 5
       ingredientIndex2: 6
       ingredientIndex3: 1
       CookBowl: Frypan
     - foodIndex: 3
-      foodName: girlledSpam
+      foodName: PieceOfSpamss
       ingredientTextInfo: "\uC2A4\uD338"
       ingredientIndex1: 7
       ingredientIndex2: 0
       ingredientIndex3: 0
       CookBowl: Frypan
     - foodIndex: 4
-      foodName: eggFry
+      foodName: Egg
       ingredientTextInfo: "\uACC4\uB780"
       ingredientIndex1: 6
       ingredientIndex2: 0

@@ -70,13 +70,16 @@ public class PlayerControl : MonoBehaviour
         {
             if (spoon.transform.parent == rightHandTR)
             {
+                Debug.Log("오른쪽 스푼 반응");
                 if (Physics.Raycast(rightHandTR.transform.position, rightHandTR.transform.forward, 0.7f, layerMask))
                 {
                     RaycastHit hitInfo;
                     if (Physics.Raycast(rightHandTR.transform.position, rightHandTR.transform.forward, out hitInfo, 0.7f, layerMask) && hitInfo.collider.name == "FryPan")
                     {
+                            Debug.Log("프라이팬 반응");
                         for (int i = 0; i < hitInfo.collider.transform.childCount; i++)
                         {
+                            Debug.Log("반복문 반응");
                             if (hitInfo.collider.transform.GetChild(i).gameObject.layer == 6)       //hitInfo.collider.transform.GetChild(i).gameObject.layer 이건 10진법이고 layerMask 이건 2진법
                             {
                                 cook.Add(hitInfo.collider.transform.GetChild(i).name);           //자식오브젝트를 리스트에 넣음
@@ -85,6 +88,7 @@ public class PlayerControl : MonoBehaviour
                         }                                                                   //여기 이름은 나중에 대체할 수도 있음
                         if (cook.Contains("Kimchi") && cook.Contains("Rice"))               //김치볶음밥 생성
                         {
+                            Debug.Log("김치볶음밥 반응");
                             cookingCompletion = Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/KimchiFriedRice"));
                             cookingCompletion.transform.position = foodPoint.transform.position;
                             cook.Clear();
@@ -95,15 +99,16 @@ public class PlayerControl : MonoBehaviour
                             cookingCompletion.transform.position = foodPoint.transform.position;
                             cook.Clear();
                         }
-                        if (cook.Contains("Friedegg"))                                      //스크럼블에그
+                        if (cook.Contains("EggFry"))                                      //스크럼블에그
                         {
                             Debug.Log("계란후라이");
                             cookingCompletion = Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/Scrambledeggs"));
+                            cookingCompletion.name = cookingCompletion.name.Replace("(Clone)", "");
                             cookingCompletion.gameObject.transform.position = foodPoint.position;
                             cookingCompletion.gameObject.transform.parent = fryFan1;
                             cook.Clear();
                         }
-                        if (cook.Contains("Spam"))                                      //스팸
+                        if (cook.Contains("Spams"))                                      //스팸
                         {
                             cookingCompletion = Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/PieceOfSpam"));
                             cookingCompletion.transform.position = foodPoint.transform.position;
@@ -118,6 +123,7 @@ public class PlayerControl : MonoBehaviour
                     }
                 }
             }
+
         }
     }
     public void OnLeftTriggerPress(InputAction.CallbackContext ctx)
@@ -151,14 +157,14 @@ public class PlayerControl : MonoBehaviour
                             cookingCompletion.transform.position = foodPoint.transform.position;
                             cook.Clear();
                         }
-                        if (cook.Contains("Friedegg"))                                      //스크럼블에그
+                        if (cook.Contains("EggFry"))                                      //스크럼블에그
                         {
-                            cookingCompletion = Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/Scrambledeggs"));
+                            cookingCompletion = Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/Scrambledeggs" + cookingCompletion.name.Replace("(Clone)", "")));
                             cookingCompletion.gameObject.transform.position = foodPoint.position;
-                            fryFan1.gameObject.transform.parent = cookingCompletion.transform;
+                            cookingCompletion.gameObject.transform.parent = fryFan1;
                             cook.Clear();
                         }
-                        if (cook.Contains("Spam"))                                      //스팸
+                        if (cook.Contains("Spams"))                                      //스팸
                         {
                             cookingCompletion = Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/PieceOfSpam"));
                             cookingCompletion.transform.position = foodPoint.transform.position;
@@ -203,7 +209,7 @@ public class PlayerControl : MonoBehaviour
                     objOnRighttHand = instTemp.transform;
                 }
             }
-            else if (Hit.collider.gameObject.layer == 6)
+            else if (Hit.collider.gameObject.layer == 6 || Hit.collider.gameObject.layer == 10)//레이어 10 추가
             {
                 Debug.Log("레이어 64");
                 GameObject OBJTemp = Hit.collider.gameObject;
