@@ -18,7 +18,7 @@ public class Customer : MonoBehaviour
     public void OnEnable()
     {
         customerText.gameObject.SetActive(false);
-/*        randomValue = Random.Range(0, 5);*/
+        randomValue = Random.Range(0, 5);
         menuImage.sprite = Resources.Load<Sprite>("FoodSprites/" + randomValue.ToString());
         orderIsDone = false;
         GameManager.GMinstatnce().GetOrder(randomValue);
@@ -46,6 +46,7 @@ public class Customer : MonoBehaviour
                 {
                     Debug.Log("이름같음");
                     orderIsDone = true;
+                    Destroy(hit.collider.gameObject);
                 }
             } 
         }
