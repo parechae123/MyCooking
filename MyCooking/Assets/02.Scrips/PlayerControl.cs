@@ -99,7 +99,7 @@ public class PlayerControl : MonoBehaviour
                             cookingCompletion.transform.position = foodPoint.transform.position;
                             cook.Clear();
                         }
-                        if (cook.Contains("eggFry"))                                      //스크럼블에그
+                        if (cook.Contains("EggFry"))                                      //스크럼블에그
                         {
                             Debug.Log("계란후라이");
                             cookingCompletion = Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/Scrambledeggs"));
@@ -157,7 +157,7 @@ public class PlayerControl : MonoBehaviour
                             cookingCompletion.transform.position = foodPoint.transform.position;
                             cook.Clear();
                         }
-                        if (cook.Contains("eggFry"))                                      //스크럼블에그
+                        if (cook.Contains("EggFry"))                                      //스크럼블에그
                         {
                             cookingCompletion = Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/Scrambledeggs" + cookingCompletion.name.Replace("(Clone)", "")));
                             cookingCompletion.gameObject.transform.position = foodPoint.transform.position;
