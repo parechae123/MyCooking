@@ -99,12 +99,12 @@ public class PlayerControl : MonoBehaviour
                             cookingCompletion.transform.position = foodPoint.transform.position;
                             cook.Clear();
                         }
-                        if (cook.Contains("EggFry"))                                      //스크럼블에그
+                        if (cook.Contains("eggFry"))                                      //스크럼블에그
                         {
                             Debug.Log("계란후라이");
                             cookingCompletion = Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/Scrambledeggs"));
                             cookingCompletion.name = cookingCompletion.name.Replace("(Clone)", "");
-                            cookingCompletion.gameObject.transform.position = foodPoint.position;
+                            cookingCompletion.gameObject.transform.position = foodPoint.transform.position;
                             cookingCompletion.gameObject.transform.parent = fryFan1;
                             cook.Clear();
                         }
@@ -157,10 +157,10 @@ public class PlayerControl : MonoBehaviour
                             cookingCompletion.transform.position = foodPoint.transform.position;
                             cook.Clear();
                         }
-                        if (cook.Contains("EggFry"))                                      //스크럼블에그
+                        if (cook.Contains("eggFry"))                                      //스크럼블에그
                         {
                             cookingCompletion = Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/Scrambledeggs" + cookingCompletion.name.Replace("(Clone)", "")));
-                            cookingCompletion.gameObject.transform.position = foodPoint.position;
+                            cookingCompletion.gameObject.transform.position = foodPoint.transform.position;
                             cookingCompletion.gameObject.transform.parent = fryFan1;
                             cook.Clear();
                         }
